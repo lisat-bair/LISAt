@@ -1,0 +1,230 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+    font-size: 25px;
+    color: #000;
+}
+
+.link-block a {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {
+}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {
+}
+
+.publication-title {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+    font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+    color: #555;
+    width: fit-content;
+    font-weight: bold;
+}
+
+.publication-awards {
+    color: #ff3860;
+    width: fit-content;
+    font-weight: bolder;
+}
+
+.publication-authors {
+}
+
+.publication-authors a {
+   color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+    text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {
+}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.publication-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.publication-body img {
+}
+
+/* Small Carousel */
+.results-carousel-large {
+  overflow: hidden;
+}
+
+.results-carousel-large {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.results-carousel-large .item {
+  width: 50vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.results-carousel-large .item img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* Ensures the image fills the screen without leaving gaps */
+  display: block;
+}
+
+
+
+
+
+
+
+/* Small Carousel */
+
+/* .results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  padding: 20px;
+  font-size: 0;
+} */
+
+/* .results-carousel-small .fa-arrow-left, 
+.results-carousel-small .prev-icon, 
+.results-carousel-small .slick-prev {
+    display: none !important;
+} */
+
+.results-carousel-small button,
+.results-carousel-small [class*="prev"],
+.results-carousel-small [class*="arrow"],
+.results-carousel-small [class*="control"] {
+    display: none !important;
+}
+
+.results-carousel-small {
+  width: 80vw; /* Adjust width for smaller carousel */
+  height: 30vh; /* Adjust height for smaller carousel */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  margin: 20px auto; /* Center the smaller carousel */
+  left: -5vw; /* Shift the carousel left */
+}
+
+.results-carousel-small .item {
+  width: 50vw; /* Smaller item width */
+  height: 50vh; /* Smaller item height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px; /* Spacing between items */
+}
+
+.results-carousel-small .item img {
+  width: 100%; /* Fit within item */
+  height: 100%;
+  object-fit: contain; /* Keeps the entire image visible */
+  display: block;
+  border-radius: 10px; /* Optional: add rounded corners */
+}
+
+/* Fade Effect */
+
+
+
+.results-carousel video {
+  margin: 0;
+}
+
+.slider-pagination .slider-page {
+  background: #000000;
+}
+
+.eql-cntrb { 
+  font-size: smaller;
+}
+
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    /* Preserve aspect ratio of the video */
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+}

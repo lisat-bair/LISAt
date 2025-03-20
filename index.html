@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="static/css/carousel.js"></script>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners, these should be filled in appropriately as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description" content="LISAt: Language-Instructed Segmentation Assistant for Satellite Imagery">
+    <meta property="og:title" content="LISAt" />
+    <meta property="og:description" content="Segmentation models can recognize a pre-defined set of objects in images. However, segmentation models that can “reason” over complex user queries that implicitly refer to multiple objects of interest are still in their infancy. Recent advances in “reasoning segmentation”—generating segmentation masks from complex, implicit query text—show that vision-language models can reason across an open domain of objects and produce reasonable segmentation outputs. However, our experiments show that such models struggle when operating on complicated remote-sensing images. In this work, we introduce LISAT, a vision-language model (VLM) designed to describe complex remote-sensing images, answer questions about those images, and also identify and segment objects within the scenes. We trained LISAT on a new curated geospatial reasoning-segmentation dataset, GRES, comprising 27,615 annotations across 9,205 images, and a multi-modal geospatial pre-training dataset, PreGRES, containing >1M QA pairs. LISAT outperforms existing geospatial foundation models such as RS-GPT4V by over 10.04% (BLEU-4) on remote-sensing visual description tasks and outperforms state-of-the-art open-domain models on remote-sensing reasoning segmentation tasks by 143.36% (gIoU). Our model, datasets, and code are available at <https://lisat.github.io>." />
+    <meta property="og:url" content="http://lisat.github.io" />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X630-->
+    <meta property="og:image" content="/static/images/LISAt_logo.png" />
+    <meta property="og:image:width" content="630" />
+    <meta property="og:image:height" content="630" />
+
+
+    <meta name="twitter:title" content="LISAt: Language-Instructed Segmentation Assistant for Satellite Imagery">
+    <meta name="twitter:description" content="Segmentation models can recognize a pre-defined set of objects in images. However, segmentation models that can “reason” over complex user queries that implicitly refer to multiple objects of interest are still in their infancy. Recent advances in “reasoning segmentation”—generating segmentation masks from complex, implicit query text—show that vision-language models can reason across an open domain of objects and produce reasonable segmentation outputs. However, our experiments show that such models struggle when operating on complicated remote-sensing images. In this work, we introduce LISAT, a vision-language model (VLM) designed to describe complex remote-sensing images, answer questions about those images, and also identify and segment objects within the scenes. We trained LISAT on a new curated geospatial reasoning-segmentation dataset, GRES, comprising 27,615 annotations across 9,205 images, and a multi-modal geospatial pre-training dataset, PreGRES, containing >1M QA pairs. LISAT outperforms existing geospatial foundation models such as RS-GPT4V by over 10.04% (BLEU-4) on remote-sensing visual description tasks and outperforms state-of-the-art open-domain models on remote-sensing reasoning segmentation tasks by 143.36% (gIoU). Our model, datasets, and code are available at <https://lisat.github.io>." />
+    <!-- Path to banner image, should be in the path listed below. Optimal dimensions are 1200X600-->
+    <meta name="twitter:image" content="static/images/LISAt_logo.png">
+    <meta name="twitter:card" content="LISAt Project Logo: A cartoon character photo of a satellite holding a a geospatial image.">
+    <!-- Keywords for your paper to be indexed by-->
+    <meta name="keywords"
+        content="Geospatial Artificial Intelligence, Multi-Modal Artificial Intelligence, Reasoning Segmentation with Satellite Images">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>LISAt: Language-Instructed Segmentation Assistant for Satellite Imagery</title>
+    <link rel="icon" type="image/x-icon" href="static/images/favicon_io/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/favicon_io">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="static/images/favicon_io/site.webmanifest">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="static/fontawesome/js/fontawesome.min.js"></script>
+    <script src="static/js/bulma-carousel.min.js"></script>
+    <script src="static/js/bulma-slider.min.js"></script>
+    <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered is-vcentered">
+                    <!-- <div class="column "><img src="static/images/LISAt_logo.png" height="187" width="187"></div> -->
+                    <div class="column has-text-centered is-four-fifths is-vcentered">
+                        <h1 class="title is-1 publication-title">LISAt: Language-Instructed Segmentation Assistant for Satellite Imagery</h1>
+                    </div>
+                </div>
+                <div class="container is-max-desktop">
+                    <div class="columns is-centered">
+                        <div class="column has-text-centered is-four-fifths">
+                            <div class="is-size-5 publication-authors">
+                                <!-- Paper authors -->
+
+                                <span class="author-block">
+                                    <a href="https://people.eecs.berkeley.edu/~jquenum/" target="_blank">Jerome Quenum *</a>,
+                                </span>
+
+                                <span class="author-block">
+                                    <a href="https://wen-hanhsieh.github.io/personal_website/" target="_blank">Wen-Han Hsieh *</a>,
+                                </span>
+
+                                <span class="author-block">
+                                    <a href="https://tsunghan-wu.github.io/" target="_blank">Tsung-Han Wu</a>,
+                                </span>
+
+                                <span class="author-block">
+                                    <a href="https://ritwikgupta.me/" target="_blank">Ritwik Gupta</a>,
+                                </span>
+
+                                <br>
+
+                                <span class="author-block">
+                                    <a href="https://people.eecs.berkeley.edu/~trevor/" target="_blank">Trevor Darrell</a>,
+                                </span>
+
+                                <span class="author-block">
+                                    <a href="https://dchan.cc/" target="_blank">David M. Chan</a>
+                                </span>
+                            </div>
+
+                            <div class="is-size-5 publication-authors">
+                                <span class="author-block">UC Berkeley<br>
+                                <span class="author-block" style="font-weight: bold;">ICML 2025</span><br>
+                                <!-- <span class="author-block" style="font-weight: bold;">BayLearn 2024 (Oral)</span></span> -->
+                            </div>
+
+                            <br>
+                            <div class="gif-container">
+                                <img src="static/images/example_0.gif" alt="Example GIF">
+                            </div>
+
+                            <div class="column has-text-centered">
+                                <div class="publication-links">
+
+                                    <span class="link-block">
+                                        <a href="#" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="ai ai-arxiv"></i>
+                                            </span>
+                                            <span>arXiv</span>
+                                        </a>
+                                    </span>
+
+                                    <!-- <span class="link-block">
+                                        <a href="https://bair.berkeley.edu/blog/2024/07/20/visual-haystacks/" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon" style="vertical-align: middle; font-size: 20px;">📝</span>
+                                            <span>Blog</span>
+                                        </a>
+                                    </span> -->
+
+                                    <!-- <span class="link-block">
+                                        <a href="https://www.youtube.com/watch?v=PZ7H9vNZZag" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fa-brands fa-youtube"></i>
+                                            </span>
+                                            <span>Youtube</span>
+                                        </a>
+                                    </span> -->
+
+                                    <span class="link-block">
+                                        <a href="https://huggingface.co/datasets/jquenum/GRES/blob/main/README.md" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fa-regular fa-face-smiling-hands"></i>
+                                            </span>
+                                            <span>GRES Dataset HF</span>
+                                        </a>
+                                    </span>
+
+                                    <!-- <span class="link-block">
+                                        <a href="https://github.com/Wen-HanHsieh/LISAT" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fa-brands fa-github"></i>
+                                            </span>
+                                            <span>LISAt's Code/Model GH</span>
+                                        </a>
+                                    </span> -->
+
+                                    <span class="link-block">
+                                        <a href="https://huggingface.co/jquenum/LISAt-7b" target="_blank"
+                                            class="external-link button is-normal is-rounded is-dark">
+                                            <span class="icon">
+                                                <i class="fa-regular fa-face-smiling-hands"></i>
+                                            </span>
+                                            <span>LISAt's Code/Model HF</span>
+                                        </a>
+                                    </span>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Paper abstract -->
+    <section class="section hero ">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-full">
+
+                    <!-- YouTube Video Link -->
+<!--                     <h2 class="title is-4">Video Introduction</h2>
+                    <div class="content has-text-justified">
+                        <div class="video-wrapper">
+                            <iframe src="#" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div> -->
+                    <h2 class="title is-4">Why LISAt?</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                        Segmentation models can recognize a pre-defined set of objects in images. However, segmentation models that can “reason” over complex user queries that implicitly refer to multiple objects of interest are still in their infancy. Recent advances in “reasoning segmentation”—generating segmentation masks from complex, implicit query text—show that vision-language models can reason across an open domain of objects and produce reasonable segmentation outputs. However, our experiments show that such models struggle when operating on complicated remote-sensing images. 
+                        <!-- In this work, we introduce LISAT, a vision-language model (VLM) designed to describe complex remote-sensing images, answer questions about those images, and also identify and segment objects within the scenes. We trained LISAT on a new curated geospatial reasoning-segmentation dataset, GRES, comprising 27,615 annotations across 9,205 images, and a multi-modal geospatial pre-training dataset, PreGRES, containing >1M QA pairs. LISAT outperforms existing geospatial foundation models such as RS-GPT4V by over 10.04% (BLEU-4) on remote-sensing visual description tasks and outperforms state-of-the-art open-domain models on remote-sensing reasoning segmentation tasks by 143.36% (gIoU). Our model, datasets, and code are available at <https://lisat.github.io>. -->
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End paper abstract -->
+
+
+
+    <section class="section hero ">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-full">
+
+                    <!-- YouTube Video Link -->
+<!--                     <h2 class="title is-4">Video Introduction</h2>
+                    <div class="content has-text-justified">
+                        <div class="video-wrapper">
+                            <iframe src="#" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    </div> -->
+                    <h2 class="title is-4">Our Solution</h2>
+                    <div class="content has-text-justified">
+                        <p>
+
+                        <!-- Segmentation models can recognize a pre-defined set of objects in images. However, segmentation models that can “reason” over complex user queries that implicitly refer to multiple objects of interest are still in their infancy. Recent advances in “reasoning segmentation”—generating segmentation masks from complex, implicit query text—show that vision-language models can reason across an open domain of objects and produce reasonable segmentation outputs. However, our experiments show that such models struggle when operating on complicated remote-sensing images. -->
+                        In this work, we introduce LISAT, a vision-language model (VLM) designed to describe complex remote-sensing images, answer questions about those images, and also identify and segment objects within the scenes. We trained LISAT on a new curated geospatial reasoning-segmentation dataset, GRES, comprising 27,615 annotations across 9,205 images, and a multi-modal geospatial pre-training dataset, PreGRES, containing >1M QA pairs. LISAT outperforms existing geospatial foundation models such as RS-GPT4V by over 10.04% (BLEU-4) on remote-sensing visual description tasks and outperforms state-of-the-art open-domain models on remote-sensing reasoning segmentation tasks by 143.36% (gIoU). Our model, datasets, and code are available at <https://lisat.github.io>.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>    
+
+
+    <!-- SESAME -->
+    <section class="section ">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-full">
+                    <h2 class="title is-4">How was GRES constructed?</h2>
+                </div>
+            </div>
+            <!-- <div id="results-carousel" class="carousel results-carousel"> -->
+                <div class="content has-text-justified">
+
+                    <p>To generate synthetic data, we use the pipeline depicted below. We start with a seed detection dataset (xView). We then filter detections for those that are both
+                        visually interesting and highly distinguishable (A). For those detection, we then generate a natural language description (B), and a
+                        pixel-wise segmentation mask (C). Finally, the natural language description is used to generate a localization query (D). Together, the
+                        segmentation mask and the query form a ground-truth pair for the LISAT reasoning segmentation fine-tuning.</p>
+
+                    <!-- <p>GRES is a semi-synthetic dataset designed explicitly for geospatial reasoning segmentation. Each sample in GRES consists of an image, a natural language query referring to a single object in that image, and a pixel-level segmentation mask (See Figure 1 for an example of a GRES query/image pair). This task allows us to train the LISAT model to correctly localize images at a pixel level within the scene, even in the case of multiple objects requiring disambiguation. To build the dataset, we begin with a subset of the xView dataset (Lam et al., 2018) consisting of 26, 541 high-resolution satellite images spanning approximately 1,400 square kilometers, covering more than 60 classes. xView consists of paired images and object detections within the images in bounding box form. To convert xView images/annotations to GRES annotations/images, we follow the process overviewed in Figure 1.</p> 
+
+                    <p>In the first part of the pipeline, we need to generate a “disambiguating query” that selects for a single object within the scene from the large set of objects. To do so, we first filter the scenes for two key objectives: (1) uniqueness (i.e. can objects be easily disambiguated with a natural language query), and (2) interest (i.e. are the objects visually interesting) (Figure 1, A). An object is considered “unique” in an image if it is one of less than 2 detections of its class in its respective quadrant, and an object is considered “visually interesting” if it belongs to a class appearing in less than 50% of the overall subset of xView detections. Comprehensive statistics of object categories after filtering are available in Table B.8.</p>
+
+                    <p>After the filtering stage, we convert the object detection to a query using a set of structured queries to a large vision and language model trained on natural images (in our case, GPT-4v (Achiam et al., 2023), Figure 1, B). In the first prompting stage, we ask the VLM to identify unique characteristics of the class within the bounding box by asking the model to ‘‘Find visual features (color, shape, size, etc.) that to help find or segment {class name} in the image.’’. We then ask the VLM to come up with a sentence describing the object in the bounding box within the scene using the collected unique characteristics (See the full prompt in Appendix B.1.1). Given these features, we prompt the VLM again with the full image, along with other detections in the image and the position of the bounding box to produce a query(see the full prompt in Appendix B.1.2, Figure 1, D).</p>
+
+                    <p>In the second part of the pipeline (Figure 1, C), we need to generate the pixel-based mask from the bounding box. To do this, we leverage a GeoSAM model (Sultana et al., 2023) with a custom high-resolution inference configuration (128 points per side, 0.95 prediction IoU threshold, and 0.95 stability score with an 80-pixel minimum mask region area) to produce a part-wise segmentation of each bounding box. We then add any sub-parts that cover more than 80px of the underlying bounding box to the final pixel mask.</p>
+
+                    <p>We then asked the VLM to rephrase each query two separate ways which added to the initially generated query gives us 3 queries per image. This pipeline overall results in a dataset consisting of 9,205 images and 27,615 natural language queries/answers within those images. From this dataset, we generate train, test, and validation splits consisting of 7,205, 1,500, and 500 images respectively.<p> -->
+
+                </div>
+
+                <div class="item is-vcentered" style="display: flex; justify-content: center; align-items: center; min-height: 8vh; padding: 1px 0;">
+                    <img src="static/images/figures/fig1.png" alt="GRES dataset overview" width="70%" />
+                </div>
+                
+
+                <br>
+                <div class="content has-text-justified">
+                    <p>
+                        For more information, please visit our <a href="#">GitHub repository</a>.
+
+                    </p>
+                </div>
+            <!-- </div> -->
+        </div>
+    </section>
+
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-full">
+                    <h2 class="title is-4">What are Some Quantitative Results of LISAt<sub>PRE</sub> and LISAT?</h2>
+
+                <!-- <div class="content has-text-justified"></div>
+                    <p>We discuss some of our interesting findings below:</p>
+                </div> -->
+
+                    <div class="content has-text-justified">
+                        <ul>
+                            <li>
+                                <b>The choice of Vision Encoder and LLM matters for the MLLM (LISAt<sub>PRE</sub>)</b>: The table below shows that models using LLama 2 as a base LLM are notably worse than Vicuna. It also shows that RemoteCLIP
+                                (which we use in LISAT) significantly outperforms both Geo-CLIP and Sat-CLIP on all domains, while slightly outperforming the base CLIP models.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item is-vcentered">
+                        <img src="static/images/vis_llm.png" alt="Effectiveness of the choice on Vision Encoder/ LMMs combinaison" width="50%">
+                    </div>
+
+                    <div class="content has-text-justified">
+                        <ul>
+                            <li>
+                                <b>LISAt<sub>PRE</sub> is competitive compare with existing methods</b>: A comparison of captioning performance on the datasets such as the UCM-
+                                Captions dataset are reported for BLEU-4 and CIDEr metrics is shown in the table below.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item is-vcentered">
+                        <img src="static/images/lisat_pre_compet.png" alt="LISAt_PRE (MLLM) is competitive" width="50%">
+                    </div>
+
+
+                    <div class="content has-text-justified">
+                        <ul>
+                            <li>
+                                <b>LISAt outperforms existing methods</b>: A comparative performance of LISAT against LISA-7B-
+                                v1 and LISA-13B-Llama2-v1 on GRES across different object sizes are reported in the table below where LISAT-7B consistently outperforms the baseline models,
+                                particularly in the Small object category.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item is-vcentered">
+                        <img src="static/images/lisat_comp.png" alt="LISAt is competitive" width="50%">
+                    </div>
+
+                    <div class="content has-text-justified">
+                        <ul>
+                            <li>
+                                <b>LISAt is scalable</b>: While
+                                adding additional data is helpful, even with 7K training images
+                                (the full GRES dataset), we observe the beginning of a plateau
+                                in performance, particularly on cIOU scores. This suggests that
+                                more data alone may not be helpful, and instead, we may need
+                                additional data variance outside the xView classes.
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="item is-vcentered">
+                        <img src="static/images/LISAt_Scaling_v2.png" alt="LISAT scaling Behavior" width="60%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section hero">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-full">
+                    <h2 class="title is-4">What are Some Qualitative Results of LISAt?</h2>
+
+                    <div id="results-carousel" class="carousel results-carousel-large">
+                        <div class="item">
+                            <img src="static/images/suc1.png" alt="Example 1" class="carousel-image" />
+                        </div>
+                        <div class="item">
+                            <img src="static/images/suc2.png" alt="Example 2" class="carousel-image" />
+                        </div>
+                        <div class="item">
+                            <img src="static/images/suc3.png" alt="Example 3" class="carousel-image" />
+                        </div>
+                        <div class="item">
+                            <img src="static/images/suc4.png" alt="Example 4" class="carousel-image" />
+                        </div>
+                        <div class="item">
+                            <img src="static/images/suc5.png" alt="Example 5" class="carousel-image" />
+                        </div>
+                    </div>
+                    
+
+                    <!-- <div class="item is-vcentered">
+                        <img src="static/images/suc1.png" alt="MY ALT TEXT" width="100%" />
+                    </div> -->
+
+                    <!-- <div class="item is-vcentered">
+                        <img src="static/images/suc2.png" alt="MY ALT TEXT" width="100%" />
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Paper poster -->
+    <!-- <section class="hero is-small is-light">
+        <div class="hero-body">
+            <div class="container">
+                <h2 class="title">Poster</h2>
+
+                <iframe src="static/pdfs/sample.pdf" width="100%" height="550">
+                </iframe>
+
+            </div>
+        </div>
+    </section> -->
+    <!--End paper poster -->
+
+
+    <!--BibTex citation -->
+    <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+            <h2 class="title">BibTeX</h2>
+            <pre><code>@article{TBD,
+  title={LISAt: Language-Instructed Segmentation Assistant for Satellite Imagery},
+  author={Quenum, Jerome and Hsieh, Wen-Han and Wu, Tsung-Han and Gupta, Ritwik and Darrell, Trevor and Chan, David M},
+  journal={TBD},
+  year={2025},
+  url={TBD}
+}</code></pre>
+        </div>
+    </section>
+    <!--End BibTex citation -->
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8">
+                    <div class="content">
+
+                        <p>
+                            This page was built using the <a
+                                href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+                            You are free to borrow the of this website, we just ask that you link back to this page in
+                            the footer. <br> This website is licensed under a <a rel="license"
+                                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                                Commons Attribution-ShareAlike 4.0 International License</a>.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Statcounter tracking code -->
+
+    <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
